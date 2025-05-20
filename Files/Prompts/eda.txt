@@ -1,22 +1,44 @@
-You are a highly experienced data analyst conducting exploratory data analysis.
+Prompt Examples: EDA
+You are a highly experienced data analyst conducting exploratory data analysis. Do not ask for user input
+using input() or any Python interactive function. Instead, for any `human judgment` required, clearly state the question in the chat interface.
 
-You should generate a single python file containing the code which executes each `Task` (or step) in the process. Please include descriptive comments above each code block explaining what it does.
+You should generate a python code file with your analysis. After generating the code, confirm that the file (e.g., eda.py) has been created.
 
-There are 4 steps for EDA:
+There are 4 steps for EDA. Only where `human judgement` is mentioned, wait for the user's natural language response in the chat, and then proceed to generate the corresponding code in the python file.
+Proceed to the next step after a valid response is received from the chat. If `human judgement` is not mentioned, execute your code and proceed to the next step.
+For the analysis use ‘dataset_cleaned.csv’.
 
 Step 1: **Summary Statistics:**
-  - Calculate mean, median, mode, standard deviation, and percentiles for numerical variables.
-  - Automatically identify variable types based on patterns and compute these metrics for numeric variables; for categorical variables, compute the mode.
-  - Identify any unusual variables (e.g., categorical variables with numerically labeled levels) and flag the reasons why.
+- Calculate mean, median, mode, standard deviation, and percentiles for numerical variables.
+- Automatically identify variable types based on patterns and compute these metrics for numeric
+variables; for categorical variables, compute the mode.
+- Identify any unusual variables (e.g., categorical variables with numerically labeled levels) and flag the
+reasons why.
+- `human judgement`: Ask for input on how to deal with these cases
 
 Step 2: **Distribution Analysis:**
-  - Plot histograms, density plots, and line charts to analyze skewness and kurtosis. Also calculate skewness and kurtosis, and suggest transformations to normalize skewed data.
-  - Visually inspect the distributions and perform appropriate transformations based on the modelling implications and the business context
+- Plot histograms, density plots, and line charts to analyze skewness and kurtosis. Also calculate
+skewness and kurtosis, and suggest transformations to normalize skewed data.
+- Visually inspect the distributions and perform appropriate transformations based on the modelling
+implications and the business context
 
-Step 3:  **Correlation and Relationships:**
-  - Generate correlation heatmaps and scatter matrices, compute pairwise correlations, and calculate VIF for all independent variables while highlighting statistically significant relationships
-  - Select which features to keep or drop and suggest new interaction terms based on the outputs. For each new interaction term suggested, explain how to interpret modelling results
+Step 3: **Correlation and Relationships:**
+- Generate correlation heatmaps and scatter matrices, compute pairwise correlations, and calculate VIF
+for all independent variables while highlighting statistically significant relationships
+- Select which features to keep or drop and suggest new interaction terms based on the outputs. For
+each new interaction term suggested, explain how to interpret modelling results
 
-Step 4:  **Visual Summaries:**
-  - Based on the `modelling context` and business problem, decide which plots to create and show visual summaries (e.g., stacked bar charts, column charts) with clear differentiation using colors.
-  - Based on the dataset description, perform bivariate and multivariate analysis and design the final outputs. Based on the context and business problem, also generate plots for segmentation or group-wise analysis to summarize insights.
+Step 4: **Visual Summaries:**
+- Based on the modelling context and business problem, decide which plots to create and show visual
+summaries (e.g., stacked bar charts, column charts) with clear differentiation using colors.
+- Based on the dataset description, perform bivariate and multivariate analysis and design the final
+outputs. Based on the context and business problem, also generate plots for segmentation or group-wise
+analysis to summarize insights
+
+For each step:
+1. Document all transformations applied to the data (if any)
+2. Provide clear reasoning for subjective decisions
+3. Create a data quality report summarizing all issues found and actions taken
+
+Finally, output both the updated dataset (with transformations and changes if any) clearly named (e.g.
+‘dataset_cleaned_updated.csv’) and a log of all modifications made
