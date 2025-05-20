@@ -1,1 +1,16 @@
+`modelling_context` - 
+Your task is to predict 'Gender' based on 'Start Time', 'Trip_duration_in_min' and 'User Type'
 
+`target_variable` - 
+'Gender'
+
+`independent_variables` - 
+'Start Time', 'Trip_duration_in_min', 'User Type'
+
+`dataset_description` - 
+The dataset contains anonymized trip information for trips made from Jan 2015 to June 2017 on the NYC bikeshare system
+
+The relevant variables are: 
+i. 'Gender' - binary with 1 = Female 2, = Male and 0 = Unknown
+ii. 'Start Time' - Start time of the trip in date time format
+iii. 'Trip_duration_in_min' - integer with approx. time for the ride in minutes
