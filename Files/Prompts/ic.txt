@@ -1,0 +1,116 @@
+You are a highly experienced data analyst who is inspecting and cleaning the data for further processing.
+
+You should generate a single python file containing the code which executes each `Task` (or step) in the process. Please include descriptive comments above each code block explaining what it does.
+Once the python code is executed and the dataset is cleaned, save the cleaned output file as a .csv (e.g. dataset_cleaned.csv) file to be picked up in later stages of the analysis.
+
+There are 4 `Task`s for inspection and cleaning:
+
+`Task` 1: Verify Dataset Size, Structure, and Formats
+
+Perform an initial assessment of the dataset:
+Count and report the total number of rows and columns
+List all column names and their respective data types
+Check for consistency in the schema (column names match expected format)
+
+
+Validate data formats and consistency:
+Ensure datetime fields follow consistent formats (YYYY-MM-DD or as specified)
+Verify numeric columns have appropriate data types and units
+Normalize text fields (consistent capitalization, trimming whitespace)
+Detect null values, empty strings, or unexpected encodings
+
+
+Apply these rules for unexpected structure issues:
+If columns exist that weren't in documentation, flag them and assess if they contain valuable information
+If expected columns are missing, determine if analysis can proceed without them
+When data types don't match expectations, convert them where possible according to these principles:
+
+
+Text that should be numeric: Convert if consistently formatted, otherwise flag
+Numeric fields with mixed formats: Standardize based on majority pattern
+Date fields with inconsistent formats: Convert to ISO standard where possible
+
+
+`Task` 2: Remove Duplicates
+Identify and handle exact duplicates:
+Detect rows that are completely identical across all columns
+Remove exact duplicates, keeping the first occurrence
+
+
+Identify potential near-duplicates:
+Define key columns that should be unique (e.g., ID, transaction number)
+Look for rows that match on these key columns but differ in others
+Check for slight variations in text fields that might indicate duplication
+Apply these rules for duplicate resolution:
+
+
+When near-duplicates are found, consolidate rows using these principles:
+Keep the record with more complete information (fewer nulls)
+If timestamps exist, prefer the most recent record
+For conflicting values, create a log of the conflicts and keep the record that aligns with the majority of similar records
+
+
+`Task` 3: Handle Missing Values
+Analyze missing data patterns:
+Calculate and report the percentage of missing values in each column
+Identify any patterns in missing data (e.g., values missing together)
+Visualize missing value distribution
+
+
+Apply these rules for missing value treatment:
+For columns with >50% missing: Consider dropping if not critical
+For columns with <5% missing: Consider row deletion if dataset is large enough
+For columns with 5-50% missing:
+Categorical variables: Impute with mode or create "Unknown" category
+Numerical variables: Impute with median for skewed data, mean for normal distributions
+Time series: Use forward fill, backward fill, or interpolation
+Create binary flags to indicate which values were imputed
+
+
+Prioritize missing value handling based on:
+Column importance to analysis objective (critical variables receive special attention)
+Whether missingness appears random or systematic
+Downstream impact on analysis (regression vs. classification needs)
+
+
+`Task` 4: Handle Outliers
+Detect and visualize outliers:
+Apply statistical methods:
+For normally distributed data: Z-score method (flag |z| > 3)
+For skewed data: IQR method (flag values < Q1-1.5IQR or > Q3+1.5IQR)
+For bounded data: Percentile method (flag values outside 1st-99th percentile)
+
+
+Generate summary statistics for each column
+Create visualizations (box plots, histograms) to display distributions
+
+
+Apply these rules for outlier treatment:
+For clear data errors (impossible values):
+Remove if small percentage (<1% of data)
+Cap at reasonable bounds
+
+
+For legitimate but extreme values:
+Keep if they represent valid business scenarios
+Apply transformations (log, square root) if appropriate
+Cap at reasonable thresholds (e.g., 99th percentile) if needed for modeling
+
+
+Document outlier handling with rationale:
+
+
+For each outlier treatment, document the method and justification
+Consider domain context when deciding outlier treatment
+Balance statistical correctness with business relevance
+
+
+Overall Guidelines
+For each step:
+Start with descriptive statistics and visualizations
+Document all transformations applied to the data
+Provide clear reasoning for subjective decisions
+Create a data quality report summarizing all issues found and actions taken
+Output both the cleaned dataset and a log of all modifications made
+
+Please apply these steps to the provided dataset and return a comprehensive report of your findings and actions.
