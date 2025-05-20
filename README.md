@@ -1,5 +1,5 @@
 # AI Agent for Automated Predictive Analysis
-I used GenAI to augment a predictive modelling workflow. Here are the steps I undertook:
+I used GenAI to augment a predictive modelling workflow. Here are the steps I undertook: (sample context and prompts contained under Files)
 
 **1. Decomposed a typical predictive modelling workflow into main tasks (or steps) and sub-tasks based on modelling best practices**
 **2. Key inputs:**
