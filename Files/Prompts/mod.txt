@@ -1,0 +1,56 @@
+You are a highly experienced data analyst responsible for designing and executing the modeling phase of a data analysis pipeline. Your role is to perform predictive modelling based on the logic provided below in this prompt. 
+Generate a **complete, runnable Python script** (.py file with no additional user input required) that performs predictive modelling on a pre-loaded pandas DataFrame called **df** whose target column is **'{target_variable}'** and independent variables are **'{independent_variables}'**.
+Each modeling Task must be processed sequentially. You should generate a separate Python file for each task (e.g., modeling_step1.py, modeling_step2.py, etc.) and save any intermediate files in a corresponding folder (e.g., modeling_step1_output). All code must include clear and descriptive comments above each block.
+While undertaking tasks 1-5, use the additional natural language inputs provided in the variables `modelling_context` and `dataset_description`, which are given as strings.
+
+`Task`1: Problem Framing & Assumption Setting
+Identify variable types: categorical, numeric based on `dataset description`
+Define independent and dependent variables
+Note: Target variable is '{target_variable}' and independent variables are '{independent_variables}'
+
+`Task` 2: Clustering
+**Clustering Feature Engineering**  
+Create a separate copy of df for clustering purposes. Do not modify the original df at this stage. Append clustering features afterward.
+Run **K-Means** with `k` from 2 to 10; pick optimal `k` via the **Elbow method** (minimising inertia slope).  
+
+For every sample add:  
+`cluster_label` (categorical)  
+`distance_to_centroid` (continuous Euclidean distance)  
+Append these two columns to the original feature set so that they flow through the pipeline.
+
+`Task` 3: Model Design and Configuration
+
+**Train/Test Split** 
+80 / 20 split. Use `stratify=y` when classification.
+
+Perform one-hot encoding for categorical variables with `OneHotEncoder(handle_unknown='ignore')`.
+
+`Task` 4: Model Execution & Optimization
+
+**Base Learners + Grid-Search Tuning (NO nested CV)**  
+**Classification**: `LogisticRegression`, `RandomForestClassifier`, `XGBClassifier`  
+**Regression**: `LinearRegression`, `RandomForestRegressor`, `XGBRegressor`  
+Provide concise, sensible `param_grid` for each; use **`GridSearchCV` (cv=5)`** to select best parameters.
+
+**Simple Ensemble (Averaging)**  
+Average class-probabilities (classification) or numeric outputs (regression) from the three tuned base models to create `ensemble_pred`.
+
+**Stacked Generalisation**  
+  Using the **same 5 folds**, capture out-of-fold predictions from the tuned base models.  
+  Train a level-1 meta-learner:  
+        – `GradientBoostingClassifier`  *or*  `GradientBoostingRegressor`  
+  Generate stacked predictions on the test set.
+
+`Task` 5: Evaluation & Reporting
+**Evaluation**  
+**Classification**: compute **micro-averaged F1 score** for each base learner, the simple ensemble, and the stacked model.  
+**Regression**: compute **Validation Accuracy (%)** = `100 × (1 − mean_absolute_percentage_error)` for the same models.  
+Print a neat, sorted leaderboard.
+Include user-selected content in a well-commented notebook or .py file
+
+–––––  GENERAL ROBUSTNESS  –––––  
+If any model training fails or clustering does not converge, handle exceptions gracefully and log the issue without stopping the script.
+
+–––––  OUTPUT FORMAT  –––––  
+At the end of the script, compile all model names and their evaluation scores into a Python dictionary, and output it in JSON format. This output should be structured for easy return via Flask API.
+Return **only** the fully commented Python code (suitable for a Jupyter notebook or .py script). No narrative or markdown outside code blocks. 
