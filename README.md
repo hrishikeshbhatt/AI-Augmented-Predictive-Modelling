@@ -49,6 +49,7 @@ For example, here is a sample prompt frame for 'Inspection and Cleaning':
         5. Output both the cleaned dataset clearly named (e.g.‘dataset_cleaned.csv') and modifications made"
 
 Thereafter our project split into two main approaches
+
 **4. Approach 1 - Fed prompt frames into Cursor to conduct predictive analysis**
  - This approach ran very smoothly and we soon had a predictive model which gave us an accuracy score of ~78% on a sample problem, which was impressive considering the limited number of features
 
