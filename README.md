@@ -2,6 +2,7 @@
 I used GenAI to augment a predictive modelling workflow. Here are the steps I undertook: (sample context and prompts contained under Files)
 
 **1. Decomposed a typical predictive modelling workflow into main tasks (or steps) and sub-tasks based on modelling best practices**
+
 **2. Key inputs:**
   - context.txt file (sample provide) - Contains `Modelling_context`, `dataset_description`, `independent_variables` and `target_variable`.
   - Input dataset - static .csv file
